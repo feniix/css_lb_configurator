@@ -9,6 +9,7 @@ Requirements:
 
 + python 3 (currently working on migrating it to python 2.x)
 + file with the following structure:
+
 ```
 url=dev.example.com
 vip_ip=10.10.0.1
@@ -16,7 +17,6 @@ app_name=example
 env=dev
 service_ip_1=192.168.1.10
 service_ip_2=192.168.1.11
-
 ```
 
 Usage:
@@ -24,6 +24,7 @@ Usage:
 `python3 gen_lb_config.py dev.example.com`
 
 Output:
+
 ```
 !************************* KEEPALIVE *************************
 keepalive 10_dev1_ka_example
