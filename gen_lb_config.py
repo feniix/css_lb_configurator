@@ -3,7 +3,7 @@ import sys
 ### Static Variables ###
 KEEP_ALIVE_PORT = "8080"
 KEEP_ALIVE_TYPE = "http"
-KEEP_ALIVE_URI = "/monitor/index.html"
+KEEP_ALIVE_URI = "/JsSf3LoWJn8aM3sWQ2LBsx4mM6/index.jsp"
 SERVICE_PROTOCOL = "tcp"
 STICKY_INACT_TIMEOUT = "480"
 OWNER_PORT = "443"
@@ -26,65 +26,65 @@ order_array = []
 
 def print_keep_alive(ip_last_octet, ip, order, env, app_name, KEEP_ALIVE_PORT, 
                    KEEP_ALIVE_TYPE, KEEP_ALIVE_URI):
-	print ('!************************* KEEPALIVE *************************')
-	print ('keepalive ', ip_last_octet, '_', env, order, '_ka_', app_name, sep='')
-	print ('  description \"keepalive for ', ip_last_octet, '_', env, order, 
-	       '_', app_name, '\"', sep='')
-	print ('  ip address ', ip, sep='')
-	print ('  port ', KEEP_ALIVE_PORT, sep='')
-	print ('  type ', KEEP_ALIVE_TYPE, sep='')
-	print ('  uri \"', KEEP_ALIVE_URI, '\"', sep='')
-	print ('  active\n')
+	print '!************************* KEEPALIVE *************************'
+	print 'keepalive {0}_{1}{2}_ka_{3}'.format(ip_last_octet, env, order, app_name)
+	print '  description \"keepalive for {0}_{1}{2}_{3}\"' \
+	      .format(ip_last_octet, env, order, app_name)
+	print '  ip address {0}'.format(ip)
+	print '  port {0}'.format(KEEP_ALIVE_PORT)
+	print '  type {0}'.format(KEEP_ALIVE_TYPE)
+	print '  uri \"{0}\"'.format(KEEP_ALIVE_URI)
+	print '  active\n'
 	
 def print_service(ip_last_octet, ip, order, env, app_name, SERVICE_PROTOCOL):
-	print ('!************************** SERVICE **************************')
-	print ('service ', ip_last_octet, '_', env, order, '_', app_name, sep='')
-	print ('  ip address ', ip, sep='')
-	print ('  keepalive type named ', ip_last_octet, '_', env, order, '_ka_',
-	       app_name, sep='')
-	print ('  protocol ', SERVICE_PROTOCOL, sep='')
-	print ('  active\n')
+	print '!************************** SERVICE **************************'
+	print 'service {0}_{1}{2}_{3}'.format(ip_last_octet, env, order, app_name)
+	print '  ip address {0}'.format(ip)
+	print '  keepalive type named {0}_{1}{2}_ka_{3}' \
+	      .format(ip_last_octet, env, order, app_name)
+	print '  protocol {0}'.format(SERVICE_PROTOCOL)
+	print '  active\n'
 	
 def print_group(vip_last_octet, env, app_name, vip, ip_last_octet_array, order_array):
-	print ('!*************************** GROUP ***************************')
-	print ('group ', vip_last_octet, '_', env, '_', app_name, sep='')
-	print ('  vip address ', vip, sep='')
+	print '!*************************** GROUP ***************************'
+	print 'group {0}_{1}_{2}'.format(vip_last_octet, env, app_name)
+	print '  vip address {0}'.format(vip)
 	for i in range(len(order_array)):
-		print ('  add destination service ', ip_last_octet_array[i], '_', env,
-		       order_array[i], '_', app_name, sep='')
-	print ('  active\n')
+		print '  add destination service {0}_{1}{2}_{3}' \
+		      .format(ip_last_octet_array[i], env, order_array[i], app_name)
+	print '  active\n'
 	
 def print_owner(vip_last_octet, vip, env, app_name, ip_last_octet_array, order_array,
                STICKY_INACT_TIMEOUT, OWNER_PORT, OWNER_PROTOCOL,
 			   REDIRECT_PORT, REDIRECT_PROTOCOL, redirect_url):
-	print ('!*************************** OWNER ***************************')
-	print ('owner ', vip_last_octet, '_', env, '_', app_name,'\n', sep='')
-	print ('  content ', vip_last_octet, '_', env, '_', app_name, sep='')
-	print ('    vip address ', vip, sep='')
+	print '!*************************** OWNER ***************************'
+	print 'owner {0}_{1}_{2}\n'.format(vip_last_octet, env, app_name)
+	print '  content {0}_{1}_{2}'.format(vip_last_octet, env, app_name)
+	print '    vip address {0}'.format(vip)
 	for i in range(len(order_array)):
-		print ('    add service ', ip_last_octet_array[i], '_', env, order_array[i],
-		       '_', app_name, sep='')
-	print ('    add dns ', redirect_url, sep='')
-	print ('    sticky-inact-timeout ', STICKY_INACT_TIMEOUT, sep='')
-	print ('    port ', OWNER_PORT, sep='')
-	print ('    protocol ', OWNER_PROTOCOL, sep='')
-	print ('    advanced-balance sticky-srcip')
-	print ('    active\n')
-	print ('  content ', vip_last_octet, '_', env, '_', app_name, '_redir', sep='')
-	print ('    vip address ', vip, sep='')
-	print ('    sticky-inact-timeout ', STICKY_INACT_TIMEOUT, sep='')
-	print ('    port ', REDIRECT_PORT, sep='')
-	print ('    protocol ', REDIRECT_PROTOCOL, sep='')
-	print ('    redirect \"https://', redirect_url, '\"', sep='')
-	print ('    active\n')
+		print '    add service {0}_{1}{2}_{3}' \
+		      .format(ip_last_octet_array[i], env, order_array[i], app_name)
+	print '    add dns {0}'.format(redirect_url)
+	print '    sticky-inact-timeout {0}'.format(STICKY_INACT_TIMEOUT)
+	print '    port {0}'.format(OWNER_PORT)
+	print '    protocol {0}'.format(OWNER_PROTOCOL)
+	print '    advanced-balance sticky-srcip'
+	print '    active\n'
+	print '  content {0}_{1}_{2}_redir'.format(vip_last_octet, env, app_name)
+	print '    vip address {0}'.format(vip)
+	print '    sticky-inact-timeout {0}'.format(STICKY_INACT_TIMEOUT)
+	print '    port {0}'.format(REDIRECT_PORT)
+	print '    protocol {0}'.format(REDIRECT_PROTOCOL)
+	print '    redirect \"https://{0}\"'.format(redirect_url)
+	print '    active\n'
 
 	
 ### Script Main ###
 	
 if len(sys.argv) <= 1:
-	print ("\n")
-	print ("ERROR: You should enter input file path!!!\n")
-	print ("USAGE: GenLBConfig.py <input_file_path>")
+	print "\n"
+	print "ERROR: You should enter input file path!!!\n"
+	print "USAGE: GenLBConfig.py <input_file_path>"
 else:
 	print ('\n')
 	if (len(sys.argv)) == 2:
@@ -120,19 +120,19 @@ else:
 
 			# Write LB configuration to standard output
 			for i in range(len(ip_array)):
-				print_keep_alive(ip_last_octet_array[i], ip_array[i], order_array[i],
-							   env, app_name, KEEP_ALIVE_PORT, KEEP_ALIVE_TYPE,
-							   KEEP_ALIVE_URI)
-				print_service(ip_last_octet_array[i], ip_array[i], order_array[i],
-							 env, app_name, SERVICE_PROTOCOL)
-			print_group(vip_last_octet, env, app_name, vip, ip_last_octet_array, order_array)
-			print_owner(vip_last_octet, vip, env, app_name, ip_last_octet_array, order_array,
-					   STICKY_INACT_TIMEOUT, OWNER_PORT, OWNER_PROTOCOL,
-					   REDIRECT_PORT, REDIRECT_PROTOCOL, redirect_url)
+				print_keep_alive (ip_last_octet_array[i], ip_array[i], order_array[i],
+							     env, app_name, KEEP_ALIVE_PORT, KEEP_ALIVE_TYPE,
+							     KEEP_ALIVE_URI)
+				print_service (ip_last_octet_array[i], ip_array[i], order_array[i],
+							  env, app_name, SERVICE_PROTOCOL)
+			print_group (vip_last_octet, env, app_name, vip, ip_last_octet_array, order_array)
+			print_owner (vip_last_octet, vip, env, app_name, ip_last_octet_array, order_array,
+					    STICKY_INACT_TIMEOUT, OWNER_PORT, OWNER_PROTOCOL,
+					    REDIRECT_PORT, REDIRECT_PROTOCOL, redirect_url)
 		except IOError:
-			print ('ERROR: File \"', input_file, '\" could not be opened!!!', sep='')
+			print 'ERROR: File \"', input_file, '\" could not be opened!!!', ''
 			sys.exit()
 		
 	else:
-		print ("ERROR: You should enter only one parameter!!! The input file path.\n")
-		print ("USAGE: GenLBConfig.py <input_file_path>")
+		print "ERROR: You should enter only one parameter!!! The input file path.\n"
+		print "USAGE: GenLBConfig.py <input_file_path>"
