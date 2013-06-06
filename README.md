@@ -7,8 +7,8 @@ This script is being developed by Fernando Paci @ The Warranty Group
 
 Requirements:
 
-+ python 3 (currently working on migrating it to python 2.x)
-+ file with the following structure:
++ Python 2. Tested with Python 2.6 $ 2.7. 
++ File with the following structure:
 
 ```
 url=dev.example.com
@@ -21,7 +21,7 @@ service_ip_2=192.168.1.11
 
 Usage:
 
-`python3 gen_lb_config.py dev.example.com`
+`python gen_lb_config.py dev.example.com`
 
 Output:
 
