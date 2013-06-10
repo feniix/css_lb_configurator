@@ -120,7 +120,8 @@ def parse_input(input_file):
         vip_last_octet = temp_array[len(temp_array)-1]
         for i in range(len(ip_array)):
             temp_array = ip_array[i].split('.')
-            ip_last_octet_array.append((temp_array[len(temp_array)-1]).rstrip())
+            ip_last_octet_array.\
+                append((temp_array[len(temp_array)-1]).rstrip())
             order_array.append(i+1)
     except IOError:
         print('ERROR: File \"', input_file, '\" could not be opened!!!', '')
