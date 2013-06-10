@@ -1,4 +1,5 @@
 import sys
+from mako.template import Template
 
 ### Static Variables ###
 KEEP_ALIVE_PORT = "8080"
@@ -27,33 +28,34 @@ order_array = []
 
 def print_keep_alive(ip_last_octet, ip, order, env, app_name, KEEP_ALIVE_PORT,
                      KEEP_ALIVE_TYPE, KEEP_ALIVE_URI):
-    print('!************************* KEEPALIVE *************************')
-    print('keepalive {0}_{1}{2}_ka_{3}'.format(ip_last_octet, env, order,
-          app_name))
-    print('  description \"keepalive for {0}_{1}{2}_{3}\"'
-          .format(ip_last_octet, env, order, app_name))
-    print('  ip address {0}'.format(ip))
-    print('  port {0}'.format(KEEP_ALIVE_PORT))
-    print('  type {0}'.format(KEEP_ALIVE_TYPE))
-    print('  uri \"{0}\"'.format(KEEP_ALIVE_URI))
-    print('  active\n')
+    template = Template(filename='./templates/ecom/keepalive.tmpl')
+    print(template.render(ip_last_octet=ip_last_octet,
+                          env=env,
+                          order=order,
+                          appname=app_name,
+                          ip=ip,
+                          ka_port=KEEP_ALIVE_PORT,
+                          ka_type=KEEP_ALIVE_TYPE,
+                          ka_uri=KEEP_ALIVE_URI))
 
 
 def print_service(ip_last_octet, ip, order, env, app_name, SERVICE_PROTOCOL):
-    print('!************************** SERVICE **************************')
-    print('service {0}_{1}{2}_{3}'.format(ip_last_octet, env, order, app_name))
-    print('  ip address {0}'.format(ip))
-    print('  keepalive type named {0}_{1}{2}_ka_{3}'
-          .format(ip_last_octet, env, order, app_name))
-    print('  protocol {0}'.format(SERVICE_PROTOCOL))
-    print('  active\n')
+    template = Template(filename='./templates/ecom/service.tmpl')
+    print(template.render(ip_last_octet=ip_last_octet,
+                          env=env,
+                          order=order,
+                          appname=app_name,
+                          ip=ip,
+                          svc_proto=SERVICE_PROTOCOL))
 
 
 def print_group(vip_last_octet, env, app_name, vip, ip_last_octet_array,
                 order_array):
-    print('!*************************** GROUP ***************************')
-    print('group {0}_{1}_{2}'.format(vip_last_octet, env, app_name))
-    print('  vip address {0}'.format(vip))
+    template = Template(filename='./templates/ecom/group.tmpl')
+    print(template.render(ip_last_octet=vip_last_octet,
+                          env=env,
+                          appname=app_name,
+                          ip=vip,))
     for i in range(len(order_array)):
         print('  add destination service {0}_{1}{2}_{3}'
               .format(ip_last_octet_array[i], env, order_array[i], app_name))
@@ -124,7 +126,7 @@ def parse_input(input_file):
                 append((temp_array[len(temp_array)-1]).rstrip())
             order_array.append(i+1)
     except IOError:
-        print('ERROR: File \"', input_file, '\" could not be opened!!!', '')
+        print('ERROR: File %s could not be opened!!!' % input_file)
         sys.exit()
 
 ### Script Main ###
