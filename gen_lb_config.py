@@ -87,6 +87,29 @@ def print_owner(vip_last_octet, vip, env, app_name, ip_last_octet_array,
     print('    active\n')
 
 
+def extract_octet(ip, octet=4):
+    '''
+       extracts an octet of an ip
+       if not specified returns the last octet
+    '''
+    import re
+    l = re.split('(.*)\.(.*)\.(.*)\.(.*)', ip)
+    return l[octet]
+
+
+def build_dict_from_file(input_file, dictionary):
+    try:
+        with open(input_file) as f:
+            for line in f:
+                if not line.isspace():
+                    (key, val) = line.split("=")
+                    dictionary[key] = val.strip('\n')
+
+    except IOError:
+        print('ERROR: File %s could not be opened!!!' % input_file)
+        sys.exit()
+
+
 def parse_input(input_file):
     global redirect_url
     global vip
@@ -119,7 +142,7 @@ def parse_input(input_file):
 
         # Parse ips to retrieve the last octet
         temp_array = vip.split('.')
-        vip_last_octet = temp_array[len(temp_array)-1]
+        vip_last_octet = extract_octet(vip)
         for i in range(len(ip_array)):
             temp_array = ip_array[i].split('.')
             ip_last_octet_array.\
