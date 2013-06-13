@@ -98,7 +98,7 @@ class CiscoCSS:
 			redirect_url=self.redirect_url)
 	
 	def formatOrder(self, index):
-		return "%s_%s%d_ka_%s" % (self.service_ip[index].octet()[3],self.env,index+1,self.app_name)
+		return "%s_%s%d_%s" % (self.service_ip[index].octet()[3],self.env,index+1,self.app_name)
 
 		
 	def printAll(self):
