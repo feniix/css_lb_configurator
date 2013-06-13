@@ -27,7 +27,7 @@ template_owner=./templates/ecom/owner.tmpl
 
 Usage:
 
-`python gen_lb_config.py dev.example.com`
+`python gen_lb_config.py dev.example.com.cfg`
 
 Output:
 
@@ -72,8 +72,8 @@ service 11_dev2_example
 !*************************** GROUP ***************************
 group 1_dev_example
   vip address 10.10.0.1
-  add destination service 10_dev1_ka_example
-  add destination service 11_dev2_ka_example
+  add destination service 10_dev1_example
+  add destination service 11_dev2_example
   active
 
 !*************************** OWNER ***************************
@@ -81,8 +81,8 @@ owner 1_dev_example
 
   content 1_dev_example
     vip address 10.10.0.1
-    add service 10_dev1_ka_example
-    add service 11_dev2_ka_example
+    add service 10_dev1_example
+    add service 11_dev2_example
     add dns dev.example.com
     sticky-inact-timeout 480
     port 443
@@ -97,6 +97,4 @@ owner 1_dev_example
     protocol tcp
     redirect "https://dev.example.com"
     active
-
-
 ```
