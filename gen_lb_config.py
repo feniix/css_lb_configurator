@@ -75,7 +75,7 @@ class CiscoCSS:
 		template = Template(filename=self.template_group)
 		services=[]
 		for i in range(len(self.service_ip)):
-			services.append("%s_%s1_ka_%s" % (self.service_ip[i].octet()[3],self.env,self.app_name))
+			services.append(self.formatOrder(i))
 		return template.render(ip_last_octet=self.vip_ip.octet()[3],
 			env=self.env,
        	                appname=self.app_name,
@@ -88,7 +88,7 @@ class CiscoCSS:
 
 		services=[]
 		for i in range(len(self.service_ip)):
-			services.append("%s_%s1_ka_%s" % (self.service_ip[i].octet()[3],self.env,self.app_name))
+			services.append(self.formatOrder(i))
 
 		return template.render(vip_last_octet=self.vip_ip.octet()[3],
 			env=self.env,
@@ -96,6 +96,9 @@ class CiscoCSS:
        	                vip_ip=self.vip_ip,
        	                services=services,
 			redirect_url=self.redirect_url)
+	
+	def formatOrder(self, index):
+		return "%s_%s%d_ka_%s" % (self.service_ip[index].octet()[3],self.env,index+1,self.app_name)
 
 		
 	def printAll(self):
