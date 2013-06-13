@@ -6,16 +6,16 @@ owner ${vip_last_octet}_${env}_${app_name}
     add service ${service_1}
     add service ${service_2}
     add dns ${redirect_url}
-    sticky-inact-timeout ${STICKY_INACT_TIMEOUT}
-    port ${OWNER_PORT}
-    protocol ${OWNER_PROTOCOL}
+    sticky-inact-timeout 480
+    port 443
+    protocol tcp
     advanced-balance sticky-srcip
     active
 
   content ${vip_last_octet}_${env}_${app_name}_redir
     vip address ${vip_ip}
-    sticky-inact-timeout ${STICKY_INACT_TIMEOUT}
-    port ${REDIRECT_PORT}
-    protocol ${REDIRECT_PROTOCOL}
+    sticky-inact-timeout 480
+    port 80
+    protocol tcp
     redirect "https://${redirect_url}"
     active

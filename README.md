@@ -11,12 +11,18 @@ Requirements:
 + File with the following structure:
 
 ```
-url=dev.example.com
+[Global]
+redirect_url=dev.example.com
 vip_ip=10.10.0.1
 app_name=example
 env=dev
-service_ip_1=192.168.1.10
-service_ip_2=192.168.1.11
+service_ip=192.168.1.10, 192.168.1.11
+
+[Template]
+template_service=./templates/ecom/service.tmpl
+template_keepalive=./templates/ecom/keepalive.tmpl
+template_group=./templates/ecom/group.tmpl
+template_owner=./templates/ecom/owner.tmpl
 ```
 
 Usage:

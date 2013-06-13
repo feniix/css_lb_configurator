@@ -3,17 +3,6 @@ from mako.template import Template
 import ConfigParser
 import socket
 
-### Static Variables ###
-KEEP_ALIVE_PORT = "8080"
-KEEP_ALIVE_TYPE = "http"
-KEEP_ALIVE_URI = "/JsSf3LoWJn8aM3sWQ2LBsx4mM6/index.jsp"
-SERVICE_PROTOCOL = "tcp"
-STICKY_INACT_TIMEOUT = "480"
-OWNER_PORT = "443"
-OWNER_PROTOCOL = "tcp"
-REDIRECT_PORT = "80"
-REDIRECT_PROTOCOL = "tcp"
-
 class IP:
 	"""IP Class"""
 
@@ -71,10 +60,7 @@ class CiscoCSS:
         	                env=self.env,
         	                order=index+1,
         	                appname=self.app_name,
-       	                	ip=self.service_ip[index],
-        	                ka_port=KEEP_ALIVE_PORT,
-        	                ka_type=KEEP_ALIVE_TYPE,
-        	                ka_uri=KEEP_ALIVE_URI)
+       	                	ip=self.service_ip[index])
 
 	def getService(self,index):
 		template = Template(filename=self.template_service)
@@ -82,8 +68,8 @@ class CiscoCSS:
 			env=self.env,
        	                order=index+1,
        	                appname=self.app_name,
-       	                ip=self.service_ip[index],
-			svc_proto=SERVICE_PROTOCOL)
+       	                ip=self.service_ip[index])
+			
 
 	def getGroup(self):
 		template = Template(filename=self.template_group)
@@ -103,13 +89,7 @@ class CiscoCSS:
        	                vip_ip=self.vip_ip,
        	                service_1="%s_%s1_ka_%s" % (self.service_ip[0].octet()[3],self.env,self.app_name),
        	                service_2="%s_%s2_ka_%s" % (self.service_ip[1].octet()[3],self.env,self.app_name),
-			redirect_url=self.redirect_url,
-			STICKY_INACT_TIMEOUT=STICKY_INACT_TIMEOUT,
-			OWNER_PORT=OWNER_PORT,
-			OWNER_PROTOCOL=OWNER_PROTOCOL,
-			REDIRECT_PORT=REDIRECT_PORT,
-			REDIRECT_PROTOCOL=REDIRECT_PROTOCOL,
-			)
+			redirect_url=self.redirect_url)
 
 		
 	def printAll(self):
