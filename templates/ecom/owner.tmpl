@@ -1,0 +1,21 @@
+!*************************** OWNER ***************************
+owner ${vip_last_octet}_${env}_${app_name}
+
+  content ${vip_last_octet}_${env}_${app_name}
+    vip address ${vip_ip}
+    add service ${service_1}
+    add service ${service_2}
+    add dns ${redirect_url}
+    sticky-inact-timeout ${STICKY_INACT_TIMEOUT}
+    port ${OWNER_PORT}
+    protocol ${OWNER_PROTOCOL}
+    advanced-balance sticky-srcip
+    active
+
+  content ${vip_last_octet}_${env}_${app_name}_redir
+    vip address ${vip_ip}
+    sticky-inact-timeout ${STICKY_INACT_TIMEOUT}
+    port ${REDIRECT_PORT}
+    protocol ${REDIRECT_PROTOCOL}
+    redirect "https://${redirect_url}"
+    active
