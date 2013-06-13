@@ -4,7 +4,7 @@ import ConfigParser
 import socket
 
 
-class IP:
+class IP(object):
     """IP Class"""
 
     def __init__(self, addr):
@@ -23,7 +23,7 @@ class IP:
         return self.addr.split(".")
 
 
-class CiscoCSS:
+class CiscoCSS(object):
 
     def __init__(self, configFile):
         self.config = ConfigParser.ConfigParser()
