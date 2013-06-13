@@ -3,8 +3,9 @@ owner ${vip_last_octet}_${env}_${app_name}
 
   content ${vip_last_octet}_${env}_${app_name}
     vip address ${vip_ip}
-    add service ${service_1}
-    add service ${service_2}
+    % for s in services:
+    add service ${s}
+    % endfor
     add dns ${redirect_url}
     sticky-inact-timeout 480
     port 443

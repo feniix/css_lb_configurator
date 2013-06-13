@@ -73,22 +73,28 @@ class CiscoCSS:
 
 	def getGroup(self):
 		template = Template(filename=self.template_group)
+		services=[]
+		for i in range(len(self.service_ip)):
+			services.append("%s_%s1_ka_%s" % (self.service_ip[i].octet()[3],self.env,self.app_name))
 		return template.render(ip_last_octet=self.vip_ip.octet()[3],
 			env=self.env,
        	                appname=self.app_name,
        	                ip=self.vip_ip,
-       	                service_ip_1="%s_%s1_ka_%s" % (self.service_ip[0].octet()[3],self.env,self.app_name),
-       	                service_ip_2="%s_%s2_ka_%s" % (self.service_ip[1].octet()[3],self.env,self.app_name),
+       	                services=services,
 			)
 
 	def getOwner(self):
 		template = Template(filename=self.template_owner)
+
+		services=[]
+		for i in range(len(self.service_ip)):
+			services.append("%s_%s1_ka_%s" % (self.service_ip[i].octet()[3],self.env,self.app_name))
+
 		return template.render(vip_last_octet=self.vip_ip.octet()[3],
 			env=self.env,
        	                app_name=self.app_name,
        	                vip_ip=self.vip_ip,
-       	                service_1="%s_%s1_ka_%s" % (self.service_ip[0].octet()[3],self.env,self.app_name),
-       	                service_2="%s_%s2_ka_%s" % (self.service_ip[1].octet()[3],self.env,self.app_name),
+       	                services=services,
 			redirect_url=self.redirect_url)
 
 		
