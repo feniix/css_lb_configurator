@@ -32,14 +32,16 @@ Usage:
 Output:
 
 ```
+$ python gen_lb_config.py dev.example.com.cfg 
 !************************* KEEPALIVE *************************
 keepalive 10_dev1_ka_example
   description "keepalive for 10_dev1_example"
   ip address 192.168.1.10
   port 8080
   type http
-  uri "/monitor/index.html"
+  uri /JsSf3LoWJn8aM3sWQ2LBsx4mM6/index.jsp
   active
+
 
 !************************** SERVICE **************************
 service 10_dev1_example
@@ -48,14 +50,16 @@ service 10_dev1_example
   protocol tcp
   active
 
+
 !************************* KEEPALIVE *************************
 keepalive 11_dev2_ka_example
   description "keepalive for 11_dev2_example"
   ip address 192.168.1.11
   port 8080
   type http
-  uri "/monitor/index.html"
+  uri /JsSf3LoWJn8aM3sWQ2LBsx4mM6/index.jsp
   active
+
 
 !************************** SERVICE **************************
 service 11_dev2_example
@@ -64,11 +68,12 @@ service 11_dev2_example
   protocol tcp
   active
 
+
 !*************************** GROUP ***************************
 group 1_dev_example
   vip address 10.10.0.1
-  add destination service 10_dev1_example
-  add destination service 11_dev2_example
+  add destination service 10_dev1_ka_example
+  add destination service 11_dev2_ka_example
   active
 
 !*************************** OWNER ***************************
@@ -76,8 +81,8 @@ owner 1_dev_example
 
   content 1_dev_example
     vip address 10.10.0.1
-    add service 10_dev1_example
-    add service 11_dev2_example
+    add service 10_dev1_ka_example
+    add service 11_dev2_ka_example
     add dns dev.example.com
     sticky-inact-timeout 480
     port 443
@@ -92,5 +97,6 @@ owner 1_dev_example
     protocol tcp
     redirect "https://dev.example.com"
     active
+
 
 ```
