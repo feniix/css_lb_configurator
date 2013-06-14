@@ -5,7 +5,7 @@ css_lb_configurator
 
 This script is being developed by Fernando Paci @ The Warranty Group
 
-All the modifications of the code to use classes by @ignacionf
+All the modifications of the code to use classes by [ignacionf](https://github.com/ignacionf)
 
 Requirements:
 
