@@ -1,0 +1,7 @@
+!*************************** GROUP ***************************
+group ${ip_last_octet}_${env}_${appname}
+  vip address ${ip}
+  % for s in services:
+  add destination service ${s}
+  % endfor
+  active

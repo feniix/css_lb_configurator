@@ -1,0 +1,14 @@
+!*************************** OWNER ***************************
+owner ${vip_last_octet}_${env}_${app_name}
+
+  content ${vip_last_octet}_${env}_${app_name}
+    vip address ${vip_ip}
+    % for s in services:
+    add service ${s}
+    % endfor
+    sticky-inact-timeout 480
+    port 80
+    protocol tcp
+    advanced-balance sticky-srcip
+    active
+
